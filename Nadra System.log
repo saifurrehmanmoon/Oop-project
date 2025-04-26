@@ -1,0 +1,3 @@
+﻿  NADRA.cpp
+F:\project oop\Nadra System\NADRA.cpp(723,1): warning C4715: 'NADRA::compare': not all control paths return a value
+  Nadra System.vcxproj -> F:\project oop\Nadra System\x64\Debug\Nadra System.exe

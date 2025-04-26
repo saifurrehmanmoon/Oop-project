@@ -1,0 +1,6 @@
+﻿  candidate.cpp
+  ELECTION.cpp
+  Source.cpp
+  Generating Code...
+F:\project oop\E Voting System\candidate.cpp(94,1): warning C4715: 'candidate::get_vote_count': not all control paths return a value
+  E Voting System.vcxproj -> F:\project oop\E Voting System\x64\Debug\E Voting System.exe
