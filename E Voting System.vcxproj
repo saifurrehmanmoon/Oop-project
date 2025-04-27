@@ -127,16 +127,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ADMINISTRATOR.h" />
     <ClInclude Include="candidate.h" />
     <ClInclude Include="ELECTION.h" />
     <ClInclude Include="LOCAL.h" />
     <ClInclude Include="login.h" />
+    <ClInclude Include="NATIONAL.h" />
+    <ClInclude Include="PROVINCIAL.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ADMINISTRATOR.cpp" />
     <ClCompile Include="candidate.cpp" />
     <ClCompile Include="ELECTION.cpp" />
     <ClCompile Include="LOCAL.cpp" />
     <ClCompile Include="login.cpp" />
+    <ClCompile Include="NATIONAL.cpp" />
+    <ClCompile Include="PROVINCIAL.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

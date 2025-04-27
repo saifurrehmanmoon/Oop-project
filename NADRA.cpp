@@ -146,42 +146,105 @@ void NADRA::input() {
         cin.ignore();
 
         // Province 
-        bool valid = false;
-        while (!valid) {
-            cout << "Enter Province: ";
-            getline(cin, province);
-
-            for (int i = 0; i < province.length(); ++i) {
-                if (province[i] >= 'a' && province[i] <= 'z') {
-                    province[i] = province[i] - 'a' + 'A'; 
+        int a;
+        while (true) {
+            while (true)
+            {
+                cout << "Province :" << endl
+                    << "1.PUNJAB" << endl
+                    << "2.SINDH" << endl
+                    << "3.KHYBER PAKHTUNKHWA" << endl
+                    << "4.BALOCHISTAN" << endl
+                    << "5.GILGIT-BALTISTAN" << endl
+                    << "6.AZAD JAMMU & KASHMIR" << endl
+                    << "7.FEDERAL CAPITAL TERRITORY" << endl;
+                cout << "Enter Province: ";
+                cin >> a;
+                if (cin.fail()||a>7 ||a<1)
+                {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "\nEnter again 1 to 7 !!!" << endl;
                 }
+                else
+                    break;
             }
-
-
-            if (
-                province == "PUNJAB" ||
-                province == "SINDH" ||
-                province == "KHYBER PAKHTUNkHWA" ||
-                province == "BALOCHISTAN" ||
-                province == "GILGIT-BALTISTAN" ||
-                province == "AZAD JAMU AND KASHMIR" ||
-                province == "ISLAMABAD CAPITAL TERRITORY"
-                ) {
-                valid = true;
+            if (a == 1)
+            {province = "PUNJAB";break;}
+            else if (a == 2)
+            {
+                province = "SINDH";break;
             }
-            else {
-                cout << "Invalid province. Please enter a valid province of Pakistan.\n";
+            else if (a == 3)
+            {
+                province = "KHYBER PAKHTUNKHWA";break;
             }
+            else if (a == 4)
+            {
+                province = "BALOCHISTAN";break;
+            }
+            else if (a == 5)
+            {
+                province = "GILGIT-BALTISTAN";break;
+            }
+            else if (a == 6)
+            {
+                province = "AZAD JAMMU & KASHMIR";break;
+            }
+            else
+            {
+                province = "FEDERAL CAPITAL TERRITORY";break;
+            }
+            
+            break;
         }
 
         //dsitrict
         bool validDistrict = false;
         while (!validDistrict) {
+            cout << "\nProvince" << province <<" of Districts :" << endl;
+            if (province == "PUNJAB") {
+                for (int i = 0;i < 38;i++)
+                {
+                    cout << i + 1 << "." << punjabDistricts[i] << endl;
+                }
+            }
+            else if (province == "SINDH") {
+                for (int i = 0;i < 31;i++)
+                {
+                    cout << i + 1 << "." << sindhDistricts[i] << endl;
+                }
+            }
+            else if (province == "KHYBER PAKHTUNKHWA") {
+                for (int i = 0;i < 26;i++)
+                {
+                    cout << i + 1 << "." << kpkDistricts[i] << endl;
+                }
+            }
+            else if (province == "BALOCHISTAN") {
+                for (int i = 0;i < 36;i++)
+                {
+                    cout << i + 1 << "." << balochistanDistricts[i] << endl;
+                }
+            }
+            else if (province == "GILGIT-BALTISTAN") {
+                for (int i = 0;i < 4;i++)
+                {
+                    cout << i + 1 << "." << gilgitBaltistanDistricts[i] << endl;
+                }
+            }
+            else if (province == "AZAD JAMMU & KASHMIR") {
+                for (int i = 0;i < 8;i++)
+                {
+                    cout << i + 1 << "." << ajkDistricts[i] << endl;
+                }
+            }
+            else if (province == "FEDERAL CAPITAL TERRITORY") {
+                cout << "1.Islamabad" << endl;
+            }
             cout << "Enter District: ";
             getline(cin, district);
 
-            string districtList;
-            
             for (int i = 0; i < district.length(); ++i) {
                 if (district[i] >= 'a' && district[i] <= 'z') {
                     district[i] = district[i] - 'a' + 'A';
@@ -228,7 +291,7 @@ void NADRA::input() {
                     }
                 }
             }
-            else if (province == "AZAD JAMMU AND KASHMIR") {
+            else if (province == "AZAD JAMMU & KASHMIR") {
                 for (int i = 0; i < sizeof(ajkDistricts) / sizeof(ajkDistricts[0]); ++i) {
                     if (district == ajkDistricts[i]) {
                         validDistrict = true;
@@ -236,7 +299,7 @@ void NADRA::input() {
                     }
                 }
             }
-            else if (province == "ISLAMABAD CAPITAL TERRITORY") {
+            else if (province == "FEDERAL CAPITAL TERRITORY") {
                 for (int i = 0; i < sizeof(islamabadDistricts) / sizeof(islamabadDistricts[0]); ++i) {
                     if (district == islamabadDistricts[i]) {
                         validDistrict = true;
@@ -255,52 +318,146 @@ void NADRA::input() {
 
         //union council
         bool found = false;
-        ifstream in("F:\\project oop\\Data Base\\pakistan union council.txt");
         string line;
         int index = 1;
-        cout << "!!! UNION COUNCIL OF PAKISTAN !!!\n";
-        while (getline(in, line)) {
-            stringstream ss(line);
-            string col1, col2;
-
-            getline(ss, col1, ',');
-            getline(ss, col2, ',');
-
-            if (col1 == district) {
-                cout << index << ". " <<"\t" << col2 << endl;
-                index++;
-            }
-        }
-        in.close();
-        do {
-            cout <<endl<< "Enter Union Council Name from the above list: ";
-            getline(cin, union_council);
-
-            for (int i = 0; i < union_council.length(); ++i) {
-                if (union_council[i] >= 'a' && union_council[i] <= 'z') {
-                    union_council[i] = union_council[i] - 'a' + 'A';
-                }
-            }
-            found = false;
-            in.open("F:\\project oop\\Data Base\\pakistan union council.txt");
+        cout << "\t!!! City of " << district << "!!!\n";
+        if (province == "PUNJAB" || province == "SINDH" || province == "KHYBER PAKHTUNKHWA" ||province == "BALOCHISTAN" || province == "FEDERAL CAPITAL TERRITORY")
+        {
+            ifstream in("F:\\project oop\\Data Base\\pakistan union council.txt");
             while (getline(in, line)) {
                 stringstream ss(line);
-                string col1, col2,col3;
+                string col1, col2;
 
                 getline(ss, col1, ',');
                 getline(ss, col2, ',');
-                getline(ss,division,',');
-                getline(ss, col3,',');
-                getline(ss, NA_NUMBER,',');
-                getline(ss, PA_NUMBER,',');
 
-                if (col2 == union_council) {
-                    found = true;
-                    break; 
+                if (col1 == district) {
+                    cout << index << ". "<< col2 << endl;
+                    index++;
                 }
             }
             in.close();
+        }
+        else if(province == "GILGIT-BALTISTAN") {
+            ifstream i("F:\\project oop\\Data Base\\GILGIT.txt");
+            while (getline(i, line))
+            {
+                stringstream s(line);
+                string col1, col2;
+                getline(s, col1, ',');
+                getline(s, col2, ',');
+                if (col1 == district)
+                    cout << index<<col2 << endl;
+            }
+            i.close();
+        }
+        else {
+            ifstream i("F:\\project oop\\Data Base\\AJK.txt");
+            while (getline(i, line))
+            {
+                stringstream s(line);
+                string col1, col2;
+                getline(s, col1, ',');
+                getline(s, col2, ',');
+                if (col1 == district)
+                    cout << index << col2 << endl;
+            }
+            i.close();
+        }
+        do {
+            if (province == "PUNJAB" || province == "SINDH" || province == "KHYBER PAKHTUNKHWA" || province == "BALOCHISTAN" || province == "FEDERAL CAPITAL TERRITORY")
+            {
+                cout << endl << "Enter City Name from the above list: ";
+                getline(cin, union_council);
 
+                for (int i = 0; i < union_council.length(); ++i) {
+                    if (union_council[i] >= 'a' && union_council[i] <= 'z') {
+                        union_council[i] = union_council[i] - 'a' + 'A';
+                    }
+                }
+                found = false;
+
+                ifstream in("F:\\project oop\\Data Base\\pakistan union council.txt");
+                while (getline(in, line)) {
+                    stringstream ss(line);
+                    string col1, col2, col3;
+
+                    getline(ss, col1, ',');
+                    getline(ss, col2, ',');
+                    getline(ss, division, ',');
+                    getline(ss, col3, ',');
+                    getline(ss, NA_NUMBER, ',');
+                    getline(ss, PA_NUMBER, ',');
+
+                    if (col2 == union_council) {
+                        found = true;
+                        break;
+                    }
+                }
+                in.close();
+            }
+            else if (province == "GILGIT-BALTISTAN")
+            {
+                cout <<endl<< "Enter City Name from the above list: ";
+                getline(cin, union_council);
+
+                for (int i = 0; i < union_council.length(); ++i) {
+                    if (union_council[i] >= 'a' && union_council[i] <= 'z') {
+                        union_council[i] = union_council[i] - 'a' + 'A';
+                    }
+                }
+                found = false;
+
+                ifstream in("F:\\project oop\\Data Base\\GILGIT.txt");
+                while (getline(in, line)) {
+                    stringstream ss(line);
+                    string col1, col2, col3;
+
+                    getline(ss, col1, ',');
+                    getline(ss, col2, ',');
+                    getline(ss, division, ',');
+                    getline(ss, col3, ',');
+                    getline(ss, NA_NUMBER, ',');
+                    getline(ss, PA_NUMBER, ',');
+
+                    if (col2 == union_council) {
+                        found = true;
+                        break;
+                    }
+                }
+                in.close();
+            }
+            else
+            {
+                cout << endl << "Enter City Name from the above list: ";
+                getline(cin, union_council);
+
+                for (int i = 0; i < union_council.length(); ++i) {
+                    if (union_council[i] >= 'a' && union_council[i] <= 'z') {
+                        union_council[i] = union_council[i] - 'a' + 'A';
+                    }
+                }
+                found = false;
+
+                ifstream in("F:\\project oop\\Data Base\\AJK.txt");
+                while (getline(in, line)) {
+                    stringstream ss(line);
+                    string col1, col2, col3;
+
+                    getline(ss, col1, ',');
+                    getline(ss, col2, ',');
+                    getline(ss, division, ',');
+                    getline(ss, col3, ',');
+                    getline(ss, NA_NUMBER, ',');
+                    getline(ss, PA_NUMBER, ',');
+
+                    if (col2 == union_council) {
+                        found = true;
+                        break;
+                    }
+                }
+                in.close();
+            }
             if (!found) {
                 cout << "\nUnion Council Not Found! Please try again.\n";
             }
@@ -353,10 +510,12 @@ void NADRA::input() {
 
         // Study 
         do {
-            cout << "Enter Study Level (0 = No Education, 1 = Primary, 2 = Secondary, 3 = Higher Education): ";
+            cout << "Enter Study Level (0 to 18): ";
             cin >> study;
-            if (study < 0 || study > 3) {
-                cout << "Invalid study level! Please enter a number between 1 and 3." << endl;
+            if (cin.fail() || study < 0 || study > 18) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Invalid study level! Please enter a number between 1 and 18." << endl;
             }
             else {
                 break;
@@ -381,7 +540,7 @@ void NADRA::input() {
         cout << "Enter Address: ";
         getline(cin, address);
 
-        out <<endl<< name << "," << year << "," << month << "," << day<< "," << cnic << "," << number << ","
+        out << name << "," << year << "," << month << "," << day<< "," << cnic << "," << number << ","
             << province << "," << district << "," <<division<<","<<NA_NUMBER<<","<<PA_NUMBER<<","
             << union_council << ","<< pakistani << "," << dual_nationality << "," << religion << ","
             << study << "," << gender << "," << address << endl;
@@ -674,50 +833,5 @@ void NADRA::search() {
 
     if (!found) {
         cout << "Record not found!" << endl;
-    }
-}
-
-bool NADRA::compare(string a)
-{
-    string line;
-    ifstream in(file);
-    bool found = false;
-
-    while (getline(in, line)) {
-        stringstream ss(line);
-        string col1, col2, col3, col4, col5;
-
-        getline(ss, col1, ',');
-        getline(ss, col2, ',');
-        getline(ss, col3, ',');
-        getline(ss, col4, ',');
-        getline(ss, col5, ',');
-
-        if (col5 == a) {
-            found = true;
-
-            time_t currentTime = time(nullptr);
-
-#ifdef _WIN32
-            tm localTime;
-            localtime_s(&localTime, &currentTime);
-#else
-            tm localTime;
-            localtime_r(&currentTime, &localTime);
-#endif
-
-            int d = (localTime.tm_year + 1900) - stoi(col2);
-            if (d > 17)
-            {
-                return false;
-            }
-            else
-                return true;
-        }
-    }
-
-    in.close();
-    if (!found) {
-        cout << "CNIC not CORRECT !!!" << endl;
     }
 }

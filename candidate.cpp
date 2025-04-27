@@ -3,124 +3,40 @@
 #include<iomanip>
 #include<sstream>
 #include<fstream>
-#include "candidate.h"
-
+#include"candidate.h"
 using namespace std;
 
-//vote increase
-void candidate::incrementvotes(string ser)
+bool candidate::check_pakistani(string a)
 {
-	string line;
-	ofstream temp("F:\\project oop\\Data Base\\temp_database.txt");
-	ifstream in(candidate_file);
-	if (!in)
-	{
-		ofstream out(candidate_file);
-		out.close();
-	}
+	ifstream in(Nadra_file);
+
 	while (getline(in, line))
 	{
-		string a, b, c;
 		stringstream s(line);
-		getline(s, a, ',');
-		getline(s, b, ',');
-		getline(s, c, ',');
-		if (a == ser)
+		string col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11, col12, col13;
+		getline(s, col1, ',');
+		getline(s, col2, ',');
+		getline(s, col3, ',');
+		getline(s, col4, ',');
+		getline(s, col5, ',');
+		getline(s, col6, ',');
+		getline(s, col7, ',');
+		getline(s, col8, ',');
+		getline(s, col9, ',');
+		getline(s, col10, ',');
+		getline(s, col11, ',');
+		getline(s, col12, ',');
+		getline(s, col13, ',');
+		if (col5 == a)
 		{
-			vote = stoi(c);
-			vote++;
-			temp << a << "," << b << "," << vote<<endl;
-		}
-		else
-			temp << line << endl;
-	}
-	in.close();
-	temp.close();
-
-	remove(candidate_file.c_str());
-	rename("F:\\project oop\\Data Base\\candidate\\temp_database.txt", candidate_file.c_str());
-}
-
-//return candidate 
-string candidate::get_candidate(string ser)
-{
-	string line="";
-	ifstream in(candidate_file);
-	if (!in)
-	{
-		ofstream out(candidate_file);
-		out.close();
-	}
-	while (getline(in, line))
-	{
-		string a, b, c;
-		stringstream s(line);
-		getline(s, a, ',');
-		getline(s, b, ',');
-		getline(s, c, ',');
-		if (a == ser)
-		{
-			return line;
+			int d = stoi(col13);
+			if (d == 1)
+			{
+				found = true;
+				break;
+			}
 		}
 	}
 	in.close();
-	return "";
-}
-
-//vote
-int candidate::get_vote_count(string ser)
-{
-	string line = "";
-	ifstream in(candidate_file);
-	if (!in)
-	{
-		ofstream out(candidate_file);
-		out.close();
-	}
-	while (getline(in, line))
-	{
-		string a, b, c;
-		stringstream s(line);
-		getline(s, a, ',');
-		getline(s, b, ',');
-		getline(s, c, ',');
-		if (a == ser)
-		{
-			int vote = stoi(c);
-			return vote;
-		}
-	}
-	in.close();
-}
-
-//add condidate & update condidate
-void candidate::set_candidate(string a, string b, int c)
-{
-	string line;
-	ifstream in(candidate_file);
-	ofstream temp("F:\\project oop\\Data Base\\temp_database.txt");
-	if (!in)
-	{
-		ofstream out(candidate_file);
-		out.close();
-	}
-	while (getline(in, line))
-	{
-		string aa, bb, cc;
-		stringstream s(line);
-		getline(s, aa, ',');
-		getline(s, bb, ',');
-		getline(s, cc, ',');
-		if (aa == a)
-		{
-			temp << a << "," << b << "," << c << endl;
-		}
-		else
-			temp << line << endl;
-	}
-	in.close();
-	temp.close();
-
-	remove(candidate_file.c_str());
-	rename("F:\\project oop\\Data Base\\temp_database.txt", candidate_file.c_str());
+	return found;
 }

@@ -8,13 +8,12 @@ using namespace std;
 
 class candidate
 {
-private:
-	string cnic,party_affiliation;
-	int vote;
-	string candidate_file;
 protected:
-	void incrementvotes(string ser);
-	string get_candidate(string ser);
-	int get_vote_count(string ser);
-	void set_candidate(string cnic, string party_affiliation, int vote);
+	string name,cnic, party_affiliation, candidate_file, party_file, line, province, union_council, district;
+	int vote;
+	bool found = false, found2 = false;
+	string Nadra_file = "F:\\project oop\\Data Base\\nadra_database.txt";
+public:
+	virtual bool check_age(string a) = 0;
+	bool check_pakistani(string a);
 };

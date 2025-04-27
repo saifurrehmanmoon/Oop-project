@@ -142,5 +142,3 @@ void ELECTION::end_election()
 
     cout << "Election will end on " << end_year << "-" << end_month << "-" << end_day << endl;
 }
-
-inline ELECTION::~ELECTION() {}

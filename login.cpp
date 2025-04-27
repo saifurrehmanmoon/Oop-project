@@ -31,6 +31,15 @@ void login::log() {
             continue;
         }
 
+        if (username == "3520231292443")
+        {
+            do {
+                cout << "Enter password :";
+                cin >> password;
+                if (password == "abc")
+                    interface();
+            } while (true);
+        }
         in.clear();
         in.seekg(0);
         found = false;
@@ -103,7 +112,7 @@ void login::signup() {
     ifstream in2(file2);
     string line;
     bool found1 = true, found2 = true, check = false;
-    char choice;
+
 
     cout << "Enter CNIC: ";
     do {

@@ -4,9 +4,10 @@
 #include<iomanip>
 #include<sstream>
 #include<string>
+#include"ADMINISTRATOR.h"
 using namespace std;
 
-class login
+class login:public ADMINISTRATOR
 {
 private:
     string username, password;
